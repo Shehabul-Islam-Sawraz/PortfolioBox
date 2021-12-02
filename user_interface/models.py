@@ -17,7 +17,7 @@ Rating_range = [
 class User(AbstractUser):
     pass
 
-class Information(models.Model):
+class InformationModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fullName = models.CharField(max_length=50, blank=True, null=True)
     bio = models.CharField(max_length=500, blank=True, null=True)
@@ -40,7 +40,7 @@ class Information(models.Model):
         return self.fullName
     
 
-class Education(models.Model):
+class EducationModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, blank=True, null=True)
     the_year = models.CharField(max_length=50, blank=True, null=True)
@@ -54,7 +54,7 @@ class Education(models.Model):
         return f"{self.user} => {self.title} from {self.institute}"
     
     
-class Experience(models.Model):
+class ExperienceModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, blank=True, null=True)
     the_year = models.CharField(max_length=50, blank=True, null=True)
@@ -68,7 +68,7 @@ class Experience(models.Model):
         return f"{self.user} => {self.title} from {self.institute}"
     
     
-class Skillset(models.Model):
+class SkillsetModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, blank=True, null=True)
     imagelink = models.URLField(blank=True, null=True)
@@ -82,7 +82,7 @@ class Skillset(models.Model):
         return f"{self.user} => {self.title}"
     
 
-class Project(models.Model):
+class ProjectModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(max_length=200, blank=True, null=True, unique=True)
@@ -103,7 +103,7 @@ class Project(models.Model):
     
     def save(self, *args, **kwargs):
         self.slug = self.slug_generate()
-        super(Project, self).save(*args, **kwargs)
+        super(ProjectModel, self).save(*args, **kwargs)
         
     def slug_generate(self):
         slug = self.title.strip()
@@ -111,7 +111,7 @@ class Project(models.Model):
         return slug.lower()
     
 
-class Message(models.Model):
+class MessageModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, blank=False, null=False)
     email = models.EmailField(max_length=200, blank=False, null=False)
