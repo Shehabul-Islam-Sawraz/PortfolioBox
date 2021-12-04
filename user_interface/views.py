@@ -24,10 +24,10 @@ def login_view(request, *args, **kwargs):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "user_interface/login.html", {"message": "Invalid Username or Password!! Please check again.."})
+            return render(request, "user_interface/loginRegister.html", {"message": "Invalid Username or Password!! Please check again.."})
     
     else:
-        return render(request, "user_interface/login.html", {"message": ""})    
+        return render(request, "user_interface/loginRegister.html", {"message": ""})    
     
 
 def logout_view(request):
@@ -44,7 +44,7 @@ def register_view(request, *args, **kwargs):
         confirmationPass = request.POST["confirmation"]
         
         if password!=confirmationPass:
-            return render(request, "user_interface/register.html", {"message": "Password doesn't match!! Please enter again.."})
+            return render(request, "user_interface/loginRegister.html", {"message": "Password doesn't match!! Please enter again.."})
         
         #Create new user if passwords matches
         
@@ -52,10 +52,10 @@ def register_view(request, *args, **kwargs):
             user = User.objects.create_user(username,email,password)
             user.save()
         except IntegrityError:
-            return render(request, "user_interface/register.html", {"message": "Username already exists.."})
+            return render(request, "user_interface/loginRegister.html", {"message": "Username already exists.."})
         
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     
     else:
-        return render(request, "user_interface/register.html")
+        return render(request, "user_interface/loginRegister.html")
