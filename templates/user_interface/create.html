@@ -35,7 +35,7 @@
 			<form class="contact100-form validate-form" enctype="multipart/form-data" method="POST">
                 <!-- Security Token -->
                 {% csrf_token %}
-                <!-- ---------------------- INTRODUCTION FORM --------------------------->
+                <!-- ---------------------- INTRODUCTION FORM ------------------------- -->
         
                 <span class="contact100-form-title">
                     Personal Information of {{ user }}
@@ -69,8 +69,8 @@
                 <!-- EMAIL -->
                 <label class="label-input100" for="email">Email Address *</label>
                 <div class="wrap-input100 validate-input">
-                    {% render_field introFORM.email id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" %}
-                    <!-- <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" {% if introFORM.email.is_bound %} value="{{ introFORM.email.value }}" {% endif %}> -->
+                    {% render_field introFORM.email id="email" class="input100" type="text" name="email" placeholder="Eg. example@gmail.com" %}
+                    <!-- <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@gmail.com" {% if introFORM.email.is_bound %} value="{{ introFORM.email.value }}" {% endif %}> -->
                     <span class="focus-input100"></span>
                     {% for error in introFORM.email.errors %}
                         <span class="text-danger ml-2">{{ error }}</span>
@@ -192,7 +192,7 @@
 
                 <hr><br>
         
-                <!-- ---------------------- EDUCATION FORM --------------------------->
+                <!-- ---------------------- EDUCATION FORM ------------------------- -->
                         
                 <span class="contact100-form-title">
                     Education details
@@ -246,7 +246,7 @@
                 
                 <hr><br>
 
-                <!-- ---------------------- Experience FORM --------------------------->
+                <!-- ---------------------- Experience FORM -------------------------- -->
                 <span class="contact100-form-title">
                     Experience details
                 </span>
@@ -298,7 +298,7 @@
                 <button id="addmore_exp" class="btn btn-primary" style="margin: 20px;">Add More Experience</button>
 
                 <br><br>
-                <!-- ---------------------- Project Details FORM --------------------------->
+                <!-- ---------------------- Project Details FORM ------------------------- -->
                         
                 <span class="contact100-form-title">
                     Projects details
@@ -319,7 +319,7 @@
                 <!-- Image Link -->
                 <label class="label-input100" for="email">Image-Link to Project</label>
                 <div class="wrap-input100 validate-input">
-                    {% render_field projectFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. google photos link" %}
+                    {% render_field projectFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. Google Photos Link" %}
                     <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if projectFORM.imagelink.is_bound %} value="{{ projectFORM.imagelink.value }}" {% endif %}> -->
                     <span class="focus-input100"></span>
                     {% for error in projectFORM.imagelink.errors %}
@@ -341,7 +341,7 @@
                 <!-- github_project -->
                 <label class="label-input100" for="email">Github link of the Project</label>
                 <div class="wrap-input100 validate-input">
-                    {% render_field projectFORM.github_project id="email" class="input100" type="text" name="github" placeholder="Eg. github repo link" %}
+                    {% render_field projectFORM.github_project id="email" class="input100" type="text" name="github" placeholder="Eg. Github Repo Link" %}
                     <!-- <input id="email" class="input100" type="text" name="github_project" placeholder="Eg. example@email.com" {% if projectFORM.github_project.is_bound %} value="{{ projectFORM.github_project.value }}" {% endif %}> -->
                     <span class="focus-input100"></span>
                     {% for error in projectFORM.github_project.errors %}
@@ -377,7 +377,7 @@
 
                 <br>
                 
- <!-- ---------------------- Skillset Details FORM --------------------------->
+                <!-- ---------------------- Skillset Details FORM ------------------------- -->
                 <span class="contact100-form-title">
                     Skillsets details
                 </span>
