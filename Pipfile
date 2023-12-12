@@ -9,6 +9,7 @@ djangorestframework = "*"
 pillow = "*"
 markdown = "*"
 django-filter = "*"
+django-widget-tweaks = "*"
 
 [dev-packages]
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #installed
     'rest_framework',
+    'widget_tweaks',
     #models
     'user_interface.apps.UserInterfaceConfig'
 ]
