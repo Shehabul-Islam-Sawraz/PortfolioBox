@@ -13,4 +13,5 @@ urlpatterns = [
     path("create/experience", views.expForm_createView, name='experience'),
     path("create/project", views.projectForm_createView, name='project'),
     path("create/skillset", views.skillForm_createView, name='skillset'),
+    path("api/<str:username>", views.api_view, name='api'),
 ]

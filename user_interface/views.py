@@ -1,13 +1,17 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse,Http404,JsonResponse
-from django.contrib.auth import authenticate,login,logout
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, Http404, JsonResponse
+from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect
-from .models import (User,InformationModel,EducationModel,ExperienceModel,ProjectModel,MessageModel,SkillsetModel)
-from .forms import (IntroForm,EducationForm,ExperienceForm,ProjectForm,MessageForm,SkillsetForm,ContactForm)
+from .models import (User, InformationModel, EducationModel, ExperienceModel,ProjectModel,MessageModel,SkillsetModel)
+from .forms import (IntroForm, EducationForm, ExperienceForm, ProjectForm,MessageForm,SkillsetForm,ContactForm)
 from django.contrib.auth.decorators import login_required
 from .serializers import (userSerializer, informationSerializer, educationSerializer, experienceSerializer, projectSerializer, skillsetSerializer, messageSerializer)
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.response import Response
+from rest_framework import serializers, permissions
+from django.core.mail import send_mail, BadHeaderError
 
 def index(request):
     return render(request, template_name="user_interface/index.html")
@@ -254,3 +258,34 @@ def skillForm_createView(request, *args, **kwargs):
         "skillsets": skillset_serializer.data,
     }
     return render(request, template_name, context)
+
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny, permissions.IsAuthenticated))
+def api_view(request, username, *args, **kwargs):
+    bioProfile = User.objects.get(username = username)
+    information_qs = InformationModel.objects.filter(user = bioProfile).first()
+    education_qs = EducationModel.objects.filter(user = bioProfile).all()
+    experience_qs = ExperienceModel.objects.filter(user = bioProfile).all()
+    project_qs = ProjectModel.objects.filter(user = bioProfile).all()
+    skillset_qs = SkillsetModel.objects.filter(user = bioProfile).all()
+    message_qs = MessageModel.objects.filter(user = bioProfile).all()
+    messageform_qs = MessageForm()
+    #Calling Serializers
+    username_serializer = userSerializer(bioProfile, many=False)
+    information_serializer = informationSerializer(information_qs, many=False)
+    education_serializer = educationSerializer(education_qs, many=True)
+    experience_serializer = experienceSerializer(experience_qs, many=True)
+    project_serializer = projectSerializer(project_qs, many=True)
+    skillset_serializer = skillsetSerializer(skillset_qs, many=True)
+    message_serializer = messageSerializer(message_qs, many=True)
+    context = {
+        "username": username,
+        "user": username_serializer.data,
+        "information": information_serializer.data,
+        "education": education_serializer.data,
+        "experience": experience_serializer.data,
+        "projects": project_serializer.data,
+        "skillsets": skillset_serializer.data,
+        # "message_form": messageform_qs.data,
+    }
+    return Response(context)
