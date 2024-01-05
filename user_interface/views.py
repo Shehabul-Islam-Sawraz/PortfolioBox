@@ -289,3 +289,79 @@ def api_view(request, username, *args, **kwargs):
         # "message_form": messageform_qs.data,
     }
     return Response(context)
+
+
+def portfolio_view(request, username, *args, **kwargs):
+    template_name = 'user_interface/portfolio.html'
+    context = {}
+    userprofile = get_object_or_404(User, username = username)
+
+    # try:
+    #     userprofile = User.objects.get(username = username)
+    # except User.DoesNotExist:
+    #     raise Http404('User does not exists.  Please Provide User Information First')
+
+    bioProfile = User.objects.get(username = username)
+    information_qs = InformationModel.objects.filter(user = bioProfile).first()
+    education_qs = EducationModel.objects.filter(user = bioProfile).all()
+    experience_qs = ExperienceModel.objects.filter(user = bioProfile).all()
+    project_qs = ProjectModel.objects.filter(user = bioProfile).all()
+    skillset_qs = SkillsetModel.objects.filter(user = bioProfile).all()
+    message_qs = MessageModel.objects.filter(user = bioProfile).all()
+    messageform_qs = MessageForm()
+    #Calling Serializers
+    username_serializer = userSerializer(bioProfile, many=False)
+    information_serializer = informationSerializer(information_qs, many=False)
+    education_serializer = educationSerializer(education_qs, many=True)
+    experience_serializer = experienceSerializer(experience_qs, many=True)
+    project_serializer = projectSerializer(project_qs, many=True)
+    skillset_serializer = skillsetSerializer(skillset_qs, many=True)
+    message_serializer = messageSerializer(message_qs, many=True)
+
+    if request.method == "GET":
+        print('GET Method')
+        form = ContactForm()
+        context = {
+            "username": username,
+            "user": username_serializer.data,
+            "information": information_serializer.data,
+            "education": education_serializer.data,
+            "experience": experience_serializer.data,
+            "projects": project_serializer.data,
+            "skillsets": skillset_serializer.data,
+            # "message_form": messageform_qs.data,
+            "form": form.data,
+        }
+    else:
+        print('POST Method')
+        to_email = information_qs.email
+        print(f'To EMAIL of portfolio user. ---> {to_email}')
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            from_email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            new_subject = 'Sender: ' + name + ' Subject:' + subject
+            # print(name, from_email, new_subject, message)
+            try:
+                send_mail(new_subject, message, from_email, [to_email, 'admin@gmail.com'])
+                form_message = "Thank You for cennecting with us. Your message has been received!" 
+            except BadHeaderError:
+                form_message = "There was a bad header error. Please try again" 
+                # return HttpResponseRedirect(reverse("portfolio"))
+                return redirect('portfolio')
+        # COntact form works
+        context = {
+            "username": username,
+            "user": username_serializer.data,
+            "information": information_serializer.data,
+            "education": education_serializer.data,
+            "experience": experience_serializer.data,
+            "projects": project_serializer.data,
+            "skillsets": skillset_serializer.data,
+            "form": form,
+            "form_message": form_message,
+        }
+    
+    return render(request, template_name, context)
