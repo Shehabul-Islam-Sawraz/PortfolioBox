@@ -190,17 +190,17 @@
             <div class="skills__container container grid">
                 <div class="row" id="skillset_container">
                     {% for item in skillsets %}
-                    <!-- Skill {{ item.id }} -->
-                    <div class="skills__container-card">
-                        <div class="card_skill shadow2">
-                            <div class="imgBx">
-                                <img src="{{ item.imagelink }}" alt=" {{ item.title }} logo">
-                            </div>
-                            <div class="contentBx">
-                                <h2> {{ item.title }} </h2>
+                        <!-- Skill {{ item.id }} -->
+                        <div class="skills__container-card">
+                            <div class="card_skill shadow2">
+                                <div class="imgBx">
+                                    <img src="{{ item.imagelink }}" alt=" {{ item.title }} logo">
+                                </div>
+                                <div class="contentBx">
+                                    <h2> {{ item.title }} </h2>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     {% endfor %}                    
                 </div>
             </div>
@@ -223,48 +223,48 @@
                             <div class="container py-2">
 
                                 {% for eduItem in education %}
-                                <!-- Timeline item {{ eduItem.id }} -->
-                                <div class="row">
-                                    <!-- Timeline design -->
-                                    <div class="col-auto text-center flex-column d-sm-flex">
-                                        <div class="row h-50 qualification__journey">
-                                            <div class="col">
-                                                <span class="qualification__line"></span>
+                                    <!-- Timeline item {{ eduItem.id }} -->
+                                    <div class="row">
+                                        <!-- Timeline design -->
+                                        <div class="col-auto text-center flex-column d-sm-flex">
+                                            <div class="row h-50 qualification__journey">
+                                                <div class="col">
+                                                    <span class="qualification__line"></span>
+                                                </div>
+                                                <div class="col">&nbsp;</div>
                                             </div>
-                                            <div class="col">&nbsp;</div>
-                                        </div>
 
-                                        <h5>
-                                            <span class="badge qualification__calendar">
-                                                <i class="uil uil-calendar-alt qualification__calendar-icon"></i>
-                                                {{ eduItem.the_year }}
-                                            </span>
-                                        </h5>
+                                            <h5>
+                                                <span class="badge qualification__calendar">
+                                                    <i class="uil uil-calendar-alt qualification__calendar-icon"></i>
+                                                    {{ eduItem.the_year }}
+                                                </span>
+                                            </h5>
 
-                                        <div class="row h-50 qualification__journey">
-                                            <div class="col">
-                                                <span class="qualification__line"></span>
+                                            <div class="row h-50 qualification__journey">
+                                                <div class="col">
+                                                    <span class="qualification__line"></span>
+                                                </div>
+                                                <div class="col">&nbsp;</div>
                                             </div>
-                                            <div class="col">&nbsp;</div>
                                         </div>
-                                    </div>
-                                    <!-- Timeline content Events -->
-                                    <div class="col py-2">
-                                        <div class="card education-card transparent_card mirror-face shadow2">
-                                            <div class="card-body">
-                                                <div class="task">
-                                                    <div class="abstract">
-                                                        <h3 class="qualification__title"> {{ eduItem.title }} </h3>
-                                                        <p class="qualification__subtitle"> {{ eduItem.institute }} </p>
-                                                    </div>
-                                                    <div class="details">
-                                                        <p class="qualification__subtitle"> {{ eduItem.description }} </p>
+                                        <!-- Timeline content Events -->
+                                        <div class="col py-2">
+                                            <div class="card education-card transparent_card mirror-face shadow2">
+                                                <div class="card-body">
+                                                    <div class="task">
+                                                        <div class="abstract">
+                                                            <h3 class="qualification__title"> {{ eduItem.title }} </h3>
+                                                            <p class="qualification__subtitle"> {{ eduItem.institute }} </p>
+                                                        </div>
+                                                        <div class="details">
+                                                            <p class="qualification__subtitle"> {{ eduItem.description }} </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 {% endfor %}
                                 
 
@@ -298,48 +298,48 @@
                             <div class="container py-2">
                                 
                                 {% for expItem in experience %}
-                                 <!-- Timeline item {{ expItem.id }} -->
-                                 <div class="row">
-                                    <!-- Timeline design -->
-                                    <div class="col-auto text-center flex-column d-sm-flex">
-                                        <div class="row h-50 qualification__journey">
-                                            <div class="col">
-                                                <span class="qualification__line"></span>
+                                    <!-- Timeline item {{ expItem.id }} -->
+                                    <div class="row">
+                                        <!-- Timeline design -->
+                                        <div class="col-auto text-center flex-column d-sm-flex">
+                                            <div class="row h-50 qualification__journey">
+                                                <div class="col">
+                                                    <span class="qualification__line"></span>
+                                                </div>
+                                                <div class="col">&nbsp;</div>
                                             </div>
-                                            <div class="col">&nbsp;</div>
-                                        </div>
 
-                                        <h5>
-                                            <span class="badge qualification__calendar">
-                                                <i class="uil uil-calendar-alt qualification__calendar-icon"></i>
-                                                {{ expItem.the_year }}
-                                            </span>
-                                        </h5>
+                                            <h5>
+                                                <span class="badge qualification__calendar">
+                                                    <i class="uil uil-calendar-alt qualification__calendar-icon"></i>
+                                                    {{ expItem.the_year }}
+                                                </span>
+                                            </h5>
 
-                                        <div class="row h-50 qualification__journey">
-                                            <div class="col">
-                                                <span class="qualification__line"></span>
+                                            <div class="row h-50 qualification__journey">
+                                                <div class="col">
+                                                    <span class="qualification__line"></span>
+                                                </div>
+                                                <div class="col">&nbsp;</div>
                                             </div>
-                                            <div class="col">&nbsp;</div>
                                         </div>
-                                    </div>
-                                    <!-- Timeline content Events -->
-                                    <div class="col py-2">
-                                        <div class="card education-card transparent_card mirror-face shadow2">
-                                            <div class="card-body">
-                                                <div class="task">
-                                                    <div class="abstract">
-                                                        <h3 class="qualification__title"> {{ expItem.title }} </h3>
-                                                        <p class="qualification__subtitle"> {{ expItem.institute }} </p>
-                                                    </div>
-                                                    <div class="details">
-                                                        <p class="qualification__subtitle">{{ expItem.description }} </p>
+                                        <!-- Timeline content Events -->
+                                        <div class="col py-2">
+                                            <div class="card education-card transparent_card mirror-face shadow2">
+                                                <div class="card-body">
+                                                    <div class="task">
+                                                        <div class="abstract">
+                                                            <h3 class="qualification__title"> {{ expItem.title }} </h3>
+                                                            <p class="qualification__subtitle"> {{ expItem.institute }} </p>
+                                                        </div>
+                                                        <div class="details">
+                                                            <p class="qualification__subtitle">{{ expItem.description }} </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 {% endfor %}
 
                                 <!-- Timeline item end -->
@@ -374,26 +374,26 @@
                 <div class="blog-slider__wrp swiper-wrapper">
 
                     {% for projItem in projects %}
-                    <!-- For portfolio item {{ projItem.id }} -->
-                    <div class="blog-slider__item swiper-slide">
-                        <div class="blog-slider__img">
-                            <img src="{{ projItem.imagelink }}" alt="Portfolio item">
-                        </div>
+                        <!-- For portfolio item {{ projItem.id }} -->
+                        <div class="blog-slider__item swiper-slide">
+                            <div class="blog-slider__img">
+                                <img src="{{ projItem.imagelink }}" alt="Portfolio item">
+                            </div>
 
-                        <div class="blog-slider__content">
-                            <span class="blog-slider__code"> December 2020</span>
-                            <div class="blog-slider__title"> {{ projItem.title }}</div>
-                            <div class="blog-slider__text"> {{ projItem.description }} </div>
-                            <a href="{{ projItem.demo }}" target="_blank" class="button blog-slider__button button--flex"> 
-                                Demo
-                                <i class="uil uil-play button__icon"></i>
-                            </a>
-                            <a href="{{ projItem.github_project }}" target="_blank" class="button blog-slider__button button--flex"> 
-                                Github
-                                <i class="uil uil-play button__icon"></i>
-                            </a>
+                            <div class="blog-slider__content">
+                                <span class="blog-slider__code"> December 2020</span>
+                                <div class="blog-slider__title"> {{ projItem.title }}</div>
+                                <div class="blog-slider__text"> {{ projItem.description }} </div>
+                                <a href="{{ projItem.demo }}" target="_blank" class="button blog-slider__button button--flex"> 
+                                    Demo
+                                    <i class="uil uil-play button__icon"></i>
+                                </a>
+                                <a href="{{ projItem.github_project }}" target="_blank" class="button blog-slider__button button--flex"> 
+                                    Github
+                                    <i class="uil uil-play button__icon"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     {% endfor %}
                     
                     
@@ -442,36 +442,35 @@
                 <div class="col-lg-6 pl-lg-4 mt-lg-0 mt-6 contact-form" id="message-me">
                     <h2 class="contact__title"> Interested to work together? - <span> Let's talk </span></h2>
                     {% if form %}
-                    {% csrf_token %}
-
-                    <div class="alert alert-primary" role="alert">
-                        {{ form_message}}
-                    </div>
-                    {% else %}
-                    <form method="POST" class="cf">
                         {% csrf_token %}
-                        <!-- <input type="hidden" name="csrfmiddlewaretoken" value="ExZss3PCHIZ6bYAKK48Pry7gtcWgUE6tTaOrEIAkj7nTGsF1HBPEvFQlUI1UOAK7"> -->
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <input type="text" name="name" class="form-control form__color mb-30 cf" required id="id_name" placeholder="Your Name">
-                            </div> 
-                            <div class="col-lg-6">
-                                <input type="email" name="email" class="form-control form__color mb-30 cf" required id="id_email" placeholder="Your Email">
-                            </div>
-                            <div class="col-12">
-                                <input type="text" name="subject" class="form-control form__color mb-30 cf" required id="is_subject" placeholder="Subject">
-                            </div>
-                            <div class="col-12">
-                                <textarea name="message" class="form-control form__color mb-30 cf" cols="30" rows="5" required id="id_message" placeholder="Your Message"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="button button--flex send-message form_button" id="contact_button">
-                                    Send Message
-                                    <i class="uil uil-message button__icon"></i>
-                                </button>
-                            </div>
+                        <div class="alert alert-primary" role="alert">
+                            {{ form_message}}
                         </div>
-                    </form>
+                    {% else %}
+                        <form method="POST" class="cf">
+                            {% csrf_token %}
+                            <!-- <input type="hidden" name="csrfmiddlewaretoken" value="ExZss3PCHIZ6bYAKK48Pry7gtcWgUE6tTaOrEIAkj7nTGsF1HBPEvFQlUI1UOAK7"> -->
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="text" name="name" class="form-control form__color mb-30 cf" required id="id_name" placeholder="Your Name">
+                                </div> 
+                                <div class="col-lg-6">
+                                    <input type="email" name="email" class="form-control form__color mb-30 cf" required id="id_email" placeholder="Your Email">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="subject" class="form-control form__color mb-30 cf" required id="is_subject" placeholder="Subject">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control form__color mb-30 cf" cols="30" rows="5" required id="id_message" placeholder="Your Message"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="button button--flex send-message form_button" id="contact_button">
+                                        Send Message
+                                        <i class="uil uil-message button__icon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     {% endif %}
                 </div>
             </div>
@@ -494,7 +493,6 @@
 
                 <div>
                     <h1 class="footer__title"> {{ user.username }} </h1>
-                    <!-- <span class="footer__subtitle"> Electrical Engineer and Developer</span> -->
                 </div>
 
                 <ul class="footer__links">

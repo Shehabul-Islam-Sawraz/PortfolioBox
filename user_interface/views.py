@@ -346,9 +346,9 @@ def portfolio_view(request, username, *args, **kwargs):
             # print(name, from_email, new_subject, message)
             try:
                 send_mail(new_subject, message, from_email, [to_email, 'admin@gmail.com'])
-                form_message = "Thank You for cennecting with us. Your message has been received!" 
+                form_message = "Thank You for connecting with us. Your message has been received!" 
             except BadHeaderError:
-                form_message = "There was a bad header error. Please try again" 
+                form_message = "There was a bad header error. Please try again!!" 
                 # return HttpResponseRedirect(reverse("portfolio"))
                 return redirect('portfolio')
         # COntact form works

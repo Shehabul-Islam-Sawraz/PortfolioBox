@@ -145,7 +145,7 @@
                 <!-- fewwords about yourself -->
                 <label class="label-input100" for="message">Few Words about Yourself, separated by Comma</label>
                 <div class="wrap-input100 validate-input">
-                    {% render_field introFORM.fewWords id="message" class="input100" name="fewWords" rows="2" placeholder="Electrical Engineer, Front-end Developer, Tutor, Full-stack Web Developer" %}
+                    {% render_field introFORM.fewWords id="message" class="input100" name="fewWords" rows="2" placeholder="Computer Science Engineer, Front-end Developer, Tutor, Full-stack Web Developer" %}
                     <span class="focus-input100"></span>
                     {% for error in introFORM.fewWords.errors %}
                         <span class="text-danger ml-2">{{ error }}</span>
