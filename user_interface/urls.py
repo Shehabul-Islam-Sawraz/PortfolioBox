@@ -15,4 +15,10 @@ urlpatterns = [
     path("create/skillset", views.skillForm_createView, name='skillset'),
     path("api/<str:username>", views.api_view, name='api'),
     path("<str:username>", views.portfolio_view, name='portfolio'),
+
+    path("update/information", views.introForm_updateView, name='update_information'),
+    path("update/education/<int:id>", views.eduForm_updateView, name='update_education'),
+    path("update/experience/<int:id>", views.expForm_updateView, name='update_experience'),
+    path("update/project/<int:id>", views.projectForm_updateView, name='update_project'),
+    path("update/skillset/<int:id>", views.skillForm_updateView, name='update_skillset'),
 ]

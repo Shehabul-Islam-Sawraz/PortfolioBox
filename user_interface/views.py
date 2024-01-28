@@ -27,7 +27,7 @@ def login_view(request, *args, **kwargs):
         # Checking if authentication is successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("create"))
+            return HttpResponseRedirect(reverse("information"))
         else:
             return render(request, "user_interface/loginRegister.html", {"message": "Invalid Username or Password!! Please check again.."})
     
@@ -364,4 +364,267 @@ def portfolio_view(request, username, *args, **kwargs):
             "form_message": form_message,
         }
     
+    return render(request, template_name, context)
+
+# ----------- Update Views ------------ #
+@login_required(login_url='login')
+def introForm_updateView(request, *args, **kwargs):
+    template_name = 'user_interface/update/information_update.html'
+    context = {}
+    user = request.user
+    if not user.is_authenticated:
+        user = "admin"
+    try:
+        obj = InformationModel.objects.filter(user = user).first()
+    except:
+        raise Http404
+    bioProfile = User.objects.get(username = user)
+    information_qs = InformationModel.objects.filter(user = bioProfile).first()
+    education_qs = EducationModel.objects.filter(user = bioProfile).all()
+    experience_qs = ExperienceModel.objects.filter(user = bioProfile).all()
+    project_qs = ProjectModel.objects.filter(user = bioProfile).all()
+    skillset_qs = SkillsetModel.objects.filter(user = bioProfile).all()
+    list_project_id = []
+    list_exp_id = []
+    list_edu_id = []
+    list_skill_id =[]
+    # list_information_id= []
+    # for information in information_qs:
+    #     list_information_id.append(information.id)
+    for project in project_qs:
+        list_project_id.append(project.id)
+    for exp in experience_qs:
+        list_exp_id.append(exp.id)
+    for edu in education_qs:
+        list_edu_id.append(edu.id)
+    for skill in skillset_qs:
+        list_skill_id.append(skill.id)
+    if request.method == 'POST':
+        intro_form = IntroForm(request.POST or None, instance = obj)
+        if intro_form.is_valid():
+            intro_form.save(commit = False)
+            intro_form.user = user
+            intro_form.save(request = request)
+    else:
+        intro_form = IntroForm(instance = obj)
+    context = {
+        'user': user,
+        'current_information_id': information_qs.id,
+        'first_edu_id': list_edu_id[0],
+        'first_exp_id': list_exp_id[0],
+        'first_project_id': list_project_id[0],
+        'first_skill_id':list_skill_id[0],
+        'introFORM': intro_form,
+    }
+    return render(request, template_name, context)
+    
+# Education form view
+@login_required(login_url='login')
+def eduForm_updateView(request, id, *args, **kwargs):
+    template_name = 'user_interface/update/education_update.html'
+    context = {}
+    user = request.user
+    if not user.is_authenticated:
+        user = "admin"
+    bioProfile = User.objects.get(username = user)
+    education_qs = EducationModel.objects.filter(user = bioProfile).all()
+    experience_qs = ExperienceModel.objects.filter(user = bioProfile).all()
+    project_qs = ProjectModel.objects.filter(user = bioProfile).all()
+    skillset_qs = SkillsetModel.objects.filter(user = bioProfile).all()
+    education_serializer = educationSerializer(education_qs, many=True)
+    next_id = id + 1
+    previous_id = id - 1
+
+    try:
+        obj = EducationModel.objects.get(user = user, pk = id)
+    except:
+        raise Http404
+    list_project_id = []
+    list_exp_id = []
+    list_edu_id = []
+    list_skill_id =[]
+    for project in project_qs:
+        list_project_id.append(project.id)
+    for exp in experience_qs:
+        list_exp_id.append(exp.id)
+    for edu in education_qs:
+        list_edu_id.append(edu.id)
+    for skill in skillset_qs:
+        list_skill_id.append(skill.id)
+    # print(f'Id list of educaiton qs: {list_id}')
+
+    if request.method == 'POST':
+        edu_form = EducationForm(request.POST or None, instance=obj)
+        if edu_form.is_valid():
+            edu_form.save(commit=False)
+            edu_form.user = user
+            edu_form.save(request = request)
+    else:
+        edu_form = EducationForm(instance=obj)
+    context = {
+        'user': user,
+        "current_id":id,
+        'first_edu_id': list_edu_id[0],
+        'first_exp_id': list_exp_id[0],
+        'first_project_id': list_project_id[0],
+        'first_skill_id':list_skill_id[0],
+        "next_id": next_id,
+        "previous_id": previous_id,
+        'eduFORM': edu_form,
+        "education": education_serializer.data,
+    }
+    return render(request, template_name, context)
+
+# Experiece form view
+@login_required(login_url='login')
+def expForm_updateView(request, id,  *args, **kwargs):
+    template_name = 'user_interface/update/experience_update.html'
+    context = {}
+    user = request.user
+    if not user.is_authenticated:
+        user = "admin"
+    bioProfile = User.objects.get(username = user)
+    experience_qs = ExperienceModel.objects.filter(user = bioProfile).all()
+    education_qs = EducationModel.objects.filter(user = bioProfile).all()
+    project_qs = ProjectModel.objects.filter(user = bioProfile).all()
+    skillset_qs = SkillsetModel.objects.filter(user = bioProfile).all()
+    experience_serializer = experienceSerializer(experience_qs, many=True)
+    obj = get_object_or_404(ExperienceModel, user = user, pk=id)
+    list_project_id = []
+    list_exp_id = []
+    list_edu_id = []
+    list_skill_id =[]
+    for project in project_qs:
+        list_project_id.append(project.id)
+    for exp in experience_qs:
+        list_exp_id.append(exp.id)
+    for edu in education_qs:
+        list_edu_id.append(edu.id)
+    for skill in skillset_qs:
+        list_skill_id.append(skill.id)
+
+    if request.method == 'POST':
+        exp_form = ExperienceForm(request.POST or None, instance=obj)
+        if exp_form.is_valid():
+            exp_form.save(commit=False)
+            exp_form.user = user
+            exp_form.save(request = request)
+    else:
+        exp_form = ExperienceForm(instance=obj)
+    context = {
+        'user': user,
+        "current_id":id,
+        "previous_id": id-1,
+        "next_id": id+1,
+        'first_edu_id': list_edu_id[0],
+        'first_exp_id': list_exp_id[0],
+        'first_project_id': list_project_id[0],
+        'first_skill_id':list_skill_id[0],        
+        'expFORM': exp_form,
+        "experience": experience_serializer.data,
+    }
+    return render(request, template_name, context)
+
+# Project form view
+@login_required(login_url='login')
+def projectForm_updateView(request, id, *args, **kwargs):
+    template_name = 'user_interface/update/project_update.html'
+    context = {}
+    user = request.user
+    if not user.is_authenticated:
+        user = "admin"
+    bioProfile = User.objects.get(username = user)
+    project_qs = ProjectModel.objects.filter(user = bioProfile).all()
+    education_qs = EducationModel.objects.filter(user = bioProfile).all()
+    experience_qs = ExperienceModel.objects.filter(user = bioProfile).all()
+    skillset_qs = SkillsetModel.objects.filter(user = bioProfile).all()
+    project_serializer = projectSerializer(project_qs, many=True)
+    obj = get_object_or_404(ProjectModel, user = user, pk=id)
+
+    list_project_id = []
+    list_exp_id = []
+    list_edu_id = []
+    list_skill_id =[]
+    for project in project_qs:
+        list_project_id.append(project.id)
+    for exp in experience_qs:
+        list_exp_id.append(exp.id)
+    for edu in education_qs:
+        list_edu_id.append(edu.id)
+    for skill in skillset_qs:
+        list_skill_id.append(skill.id)
+
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST or None, instance=obj)
+        if project_form.is_valid():
+            project_form.save(commit=False)
+            project_form.user = user
+            project_form.save(request = request)
+    else:
+        project_form = ProjectForm(instance=obj)
+    context = {
+        'user': user,
+        "current_id":id,
+        'first_edu_id': list_edu_id[0],
+        'first_exp_id': list_exp_id[0],
+        'first_project_id': list_project_id[0],
+        'first_skill_id':list_skill_id[0],  
+        'next_id': id+1,
+        'previous_id': id -1,
+        'projectFORM': project_form,
+        "projects": project_serializer.data,
+    }
+    return render(request, template_name, context)
+
+
+
+# Project form view
+@login_required(login_url='login')
+def skillForm_updateView(request, id, *args, **kwargs):
+    template_name = 'user_interface/update/skill_update.html'
+    context = {}
+    user = request.user
+    if not user.is_authenticated:
+        user = "admin"
+    bioProfile = User.objects.get(username = user)
+    skillset_qs = SkillsetModel.objects.filter(user = bioProfile).all()
+    skillset_serializer = skillsetSerializer(skillset_qs, many=True)
+    education_qs = EducationModel.objects.filter(user = bioProfile).all()
+    experience_qs = ExperienceModel.objects.filter(user = bioProfile).all()
+    project_qs = ProjectModel.objects.filter(user = bioProfile).all()
+    obj = get_object_or_404(SkillsetModel, user = user, pk=id)
+    list_project_id = []
+    list_exp_id = []
+    list_edu_id = []
+    list_skill_id =[]
+    for project in project_qs:
+        list_project_id.append(project.id)
+    for exp in experience_qs:
+        list_exp_id.append(exp.id)
+    for edu in education_qs:
+        list_edu_id.append(edu.id)
+    for skill in skillset_qs:
+        list_skill_id.append(skill.id)
+
+    if request.method == 'POST':
+        skill_form = SkillsetForm(request.POST or None, instance=obj)
+        if skill_form.is_valid():
+            skill_form.save(commit=False)
+            skill_form.user = user
+            skill_form.save(request = request)
+    else:
+        skill_form = SkillsetForm(instance= obj)
+
+    context = {
+        'user': user,
+        "current_id":id,
+        'first_edu_id': list_edu_id[0],
+        'first_exp_id': list_exp_id[0],
+        'first_project_id': list_project_id[0],
+        'first_skill_id':list_skill_id[0],
+        'next_id': id+1,
+        'previous_id': id-1,
+        'skillFORM': skill_form, # skill_form,
+        "skillsets": skillset_serializer.data,
+    }
     return render(request, template_name, context)
