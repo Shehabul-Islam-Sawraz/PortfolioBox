@@ -21,4 +21,10 @@ urlpatterns = [
     path("update/experience/<int:id>", views.expForm_updateView, name='update_experience'),
     path("update/project/<int:id>", views.projectForm_updateView, name='update_project'),
     path("update/skillset/<int:id>", views.skillForm_updateView, name='update_skillset'),
+
+    path("delete/information/<int:id>", views.information_deleteView, name='delete_information'),
+    path("delete/education/<int:id>", views.education_deleteView, name='delete_education'),
+    path("delete/experience/<int:id>", views.experience_deleteView, name='delete_experience'),
+    path("delete/project/<int:id>", views.project_deleteView, name='delete_project'),
+    path("delete/skillset/<int:id>", views.skillset_deleteView, name='delete_skillset'),
 ]
